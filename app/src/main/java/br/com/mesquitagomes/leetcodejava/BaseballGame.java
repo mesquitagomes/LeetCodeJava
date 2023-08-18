@@ -53,70 +53,52 @@ package br.com.mesquitagomes.leetcodejava;
  * "1" - Add 1 to the record, record is now [1].
  * "C" - Invalidate and remove the previous score, record is now [].
  * Since the record is empty, the total sum is 0.
- * *
+ *
  * Constraints:
  * 
  * * 1 <= operations.length <= 1000
+ * 
  * * operations[i] is "C", "D", "+", or a string representing an integer in the
  * range [-3 * 104, 3 * 104].
+ * 
  * * For operation "+", there will always be at least two previous scores on the
  * record.
+ * 
  * * For operations "C" and "D", there will always be at least one previous
  * score on the record.
- */
+  */
 public class BaseballGame {
 
     public int calPoints(String[] operations) {
 
-        int sum = 0;
+        int i = 0, sum = 0;
+        int[] record = new int[operations.length];
 
-        for (int i = 0; i < operations.length; i++) {
-            String op = operations[i];
-
-            if (op.equals("C")) {
-                if (i - 1 >= 0) {
-                    PreviousNumber pn = findPreviousNumAndIndex(operations, i);
-                    sum -= pn.number;
-                    operations[pn.index] = "X";
+        for (String op : operations) {
+            switch (op) {
+                case "C" -> {
+                    sum -= record[--i];
+                    record[i] = 0;
                 }
-            } else if (op.equals("D")) {
-                if (i - 1 >= 0) {
-                    PreviousNumber pn = findPreviousNumAndIndex(operations, i);
-                    operations[i] = String.valueOf(2 * pn.number);
-                    sum += 2 * pn.number;
+                case "D" -> {
+                    record[i] = record[i - 1] * 2;
+                    sum += record[i];
+                    i++;
                 }
-            } else if (op.equals("+")) {
-                PreviousNumber pn1 = findPreviousNumAndIndex(operations, i);
-                PreviousNumber pn2 = findPreviousNumAndIndex(operations, pn1.index);
-                operations[i] = String.valueOf(pn2.number + pn1.number);
-                sum += (pn2.number + pn1.number);
-            } else {
-                sum += Integer.parseInt(operations[i]);
+                case "+" -> {
+                    record[i] = record[i - 1] + record[i - 2];
+                    sum += record[i];
+                    i++;
+                }
+                default -> {
+                    record[i] = Integer.parseInt(op);
+                    sum += record[i];
+                    i++;
+                }
             }
         }
 
         return sum;
     }
 
-    public PreviousNumber findPreviousNumAndIndex(String[] array, int i) {
-        if(i - 1 < 0)
-            return null;
-
-        try {
-            Integer n = Integer.parseInt(array[i - 1]);
-            return new PreviousNumber(n, i - 1);
-        } catch (NumberFormatException e) {
-            return findPreviousNumAndIndex(array, i - 1);
-        }
-    }
-
-    public class PreviousNumber {
-        public Integer number;
-        public Integer index;
-
-        public PreviousNumber(Integer number, Integer index) {
-            this.number = number;
-            this.index = index;
-        }
-    }
 }
