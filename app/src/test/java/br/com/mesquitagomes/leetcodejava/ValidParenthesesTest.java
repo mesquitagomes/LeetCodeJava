@@ -24,7 +24,8 @@ public class ValidParenthesesTest {
                 { "([)]", false },
                 { "{[]}", true },
                 { "((", false },
-                { "){", false }
+                { "){", false },
+                { "((", false }
         };
 
         return operationsData;

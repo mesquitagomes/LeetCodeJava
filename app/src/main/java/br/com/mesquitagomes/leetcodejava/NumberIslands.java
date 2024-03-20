@@ -1,7 +1,8 @@
 package br.com.mesquitagomes.leetcodejava;
 
 /**
- * Number of Islands
+ * 200. Number of Islands
+ * Medium
  * 
  * Given a 2D grid map of '1's (land) and 'O's (water), count the number of
  * islands. An island is surrounded by water and is formed by connecting

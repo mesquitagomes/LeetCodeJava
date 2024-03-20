@@ -33,11 +33,12 @@ public class ReorderAnArray {
         int[] arr = new int[x.length];
 
         for(int i = 0; i < x.length; i++) {
-            if(arr[y[i]] != 0) {
-                arr[y[i]+1] = arr[y[i]];
-                arr[y[i]] = x[i];
+            int index = y[i];
+            if(arr[index] != 0) {
+                arr[index + 1] = arr[index];
+                arr[index] = x[i];
             } else
-                arr[y[i]] = x[i];
+                arr[index] = x[i];
         }
 
         return arr;

@@ -6,8 +6,8 @@ import java.util.Scanner;
 /**
  * Unique combination of Boxes
  * 
- * Suppose you are given a set of boxes numbered from 0 to n. Each box has a unique binary representation based on the number of I's in its binary form.
- * Your task is to create an array of length n+l that contains the number of I's in the binary representation of each box number from O to n.
+ * Suppose you are given a set of boxes numbered from 0 to n. Each box has a unique binary representation based on the number of 1's in its binary form.
+ * Your task is to create an array of length n+l that contains the number of 1's in the binary representation of each box number from O to n.
  * Write a function that takes n as input and returns the array with the required information?
  * 
  * Example 1:
@@ -54,6 +54,7 @@ public class UniqueBinaryBox {
 
     public static void main(String args[]) {
 
+        System.out.println("Give a number 0 <= n <= 100000: ");
         Scanner sc = new Scanner(System.in);
         int n = Integer.parseInt(sc.nextLine());
         sc.close();
